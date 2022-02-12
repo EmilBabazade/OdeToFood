@@ -37,9 +37,9 @@ namespace OdeToFood.Data
 
         public Restaurant GetById(int id)
         {
-            var restaurants =  from r in _restaurants
-                                where r.Id == id
-                                select r;
+            var restaurants = from r in _restaurants
+                              where r.Id == id
+                              select r;
             return restaurants.SingleOrDefault();
         }
 
@@ -49,6 +49,23 @@ namespace OdeToFood.Data
                    where string.IsNullOrWhiteSpace(name) || r.Name.ToLower().StartsWith(name.ToLower())
                    orderby r.Name
                    select r;
+        }
+
+        public Restaurant Update(Restaurant restaurant)
+        {
+            var restaurantToUpdate = GetById(restaurant.Id);
+            if (restaurantToUpdate != null)
+            {
+                restaurantToUpdate.Location = restaurant.Location;
+                restaurantToUpdate.Name = restaurant.Name;
+                restaurantToUpdate.Cuisine = restaurant.Cuisine;
+            }
+            return restaurant;
+        }
+
+        public int Commit()
+        {
+            return 0;
         }
     }
 }

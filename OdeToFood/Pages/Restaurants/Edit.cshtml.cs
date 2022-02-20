@@ -42,7 +42,10 @@ namespace OdeToFood.Pages.Restaurants
         public IActionResult OnPost()
         {
             Cuisines = _htmlHelper.GetEnumSelectList<CuisineType>();
-            if (!ModelState.IsValid) return Page();
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
             if (Restaurant.Id > 0)
             {
